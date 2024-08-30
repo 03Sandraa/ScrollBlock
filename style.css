@@ -1,0 +1,110 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    width: 100%;
+    min-height: 400vh;
+
+    background-color: rgb(161, 200, 216);
+    animation: Achtergrond 1s linear;
+}
+
+@keyframes Achtergrond {
+    to {
+        background-color: rgb(90, 102, 123);
+    }
+}
+
+.blockAnimation::before,
+.blockAnimation::after {
+    height: 2rem;
+    width: 2rem;
+    position: absolute;
+    background-color: rgb(90, 102, 123);
+}
+
+@keyframes kleurVerloop {
+    to {
+        background-color: rgb(161, 200, 216);
+    }
+}
+
+.blockAnimation {
+    width: 4rem;
+    height: 4rem;
+
+    position: fixed;
+    top:-webkit-calc(50% - 2rem);
+    top:-moz-calc(50% - 2rem);
+    top:calc(50% - 2rem);
+
+    left:-webkit-calc(50% - 2rem);
+    left:-moz-calc(50% - 2rem);
+    left:calc(50% - 2rem);
+}
+
+.blockAnimation::before {
+    content: "";
+    display: block;
+    transform: translate(0, 0);
+    animation: Animatie1 1s infinite, kleurVerloop 1s linear;
+}
+
+.blockAnimation::after {
+    content: "";
+    display: block;
+    transform: translate(2rem, 2rem);
+    animation: Animatie2 1s infinite, kleurVerloop 1s linear;
+}
+
+@keyframes Animatie1 {
+
+    0%, 50%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    12.5%, 62.5% {
+        transform: translate(2rem, 0);
+    }
+
+    25%, 75% {
+        transform: translate(2rem, 2rem);
+    }
+
+    37.5%, 87.5% {
+        transform: translate(0, 2rem);
+    }
+}
+
+@keyframes Animatie2 {
+
+    0%, 50%,
+    100% {
+        transform: translate(2rem, 2rem);
+    }
+
+    12.5%, 62.5% {
+        transform: translate(0, 2rem);
+    }
+
+    25%, 75% {
+        transform: translate(0, 0);
+    }
+
+    37.5%, 87.5% {
+        transform: translate(2rem, 0);
+    }
+}
+
+body,
+.blockAnimation::before,
+.blockAnimation::after {
+    animation-play-state: paused;
+    animation-delay: calc(var(--scroll) * -1s);
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+}
